@@ -10,6 +10,9 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.pro.Hackathon.ExceptionHandler.CancellationNotAllowedException;
+import com.pro.Hackathon.ExceptionHandler.RoomAlreadyBookedException;
+import com.pro.Hackathon.ExceptionHandler.UnauthorizedActionException;
 import com.pro.Hackathon.Model.HBooking;
 import com.pro.Hackathon.Model.HHotel;
 import com.pro.Hackathon.Model.HRoom;
@@ -157,7 +160,7 @@ public class HackathonService {
     // CANCEL BOOKING
     public String cancelBooking(Long bookingId, Long userId) {
 
-        Booking booking = bookingRepo.findById(bookingId)
+        HBooking booking = bookingRepo.findById(bookingId)
                 .orElseThrow(() -> new ResourceNotFoundException("Booking not found"));
 
         if (!booking.getUser().getUserid().equals(userId)) {
