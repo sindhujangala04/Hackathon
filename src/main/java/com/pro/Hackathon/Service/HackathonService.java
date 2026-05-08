@@ -10,25 +10,34 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.pro.Hackathon.Model.HBooking;
+import com.pro.Hackathon.Model.HHotel;
+import com.pro.Hackathon.Model.HRoom;
+import com.pro.Hackathon.Model.HUser;
+import com.pro.Hackathon.Repository.HBookingRepository;
+import com.pro.Hackathon.Repository.HHotelRepository;
+import com.pro.Hackathon.Repository.HRoomRepository;
+import com.pro.Hackathon.Repository.HUserRepository;
+
 
 
 @Service
 public class HotelService {
 
     @Autowired
-    private UserRepository userRepo;
+    private HUserRepository userRepo;
 
     @Autowired
-    private HotelRepository hotelRepo;
+    private HHotelRepository hotelRepo;
 
     @Autowired
-    private RoomRepository roomRepo;
+    private HRoomRepository roomRepo;
 
     @Autowired
-    private BookingRepository bookingRepo;
+    private HBookingRepository bookingRepo;
 
     // SEARCH ROOMS
-    public List<Rooms> searchRooms(
+    public List<HRoom> searchRooms(
             Long hotelId,
             LocalDate fromDate,
             LocalDate toDate,
@@ -55,10 +64,10 @@ public class HotelService {
     // BOOK ROOM
     public String bookRoom(Long userId, Long roomId, LocalDate checkIn, LocalDate checkOut) {
 
-        UserHotel user = userRepo.findById(userId)
+        HUser user = userRepo.findById(userId)
                 .orElseThrow(() -> new ResourceNotFoundException("User not found"));
 
-        Rooms room = roomRepo.findById(roomId)
+        HRoom room = roomRepo.findById(roomId)
                 .orElseThrow(() -> new ResourceNotFoundException("Room not found"));
 
         boolean alreadyBooked = bookingRepo.isRoomBooked(roomId, checkIn, checkOut);
@@ -66,7 +75,7 @@ public class HotelService {
             throw new RoomAlreadyBookedException("Room is already booked for the selected dates");
         }
 
-        Booking booking = new Booking();
+        HBooking booking = new HBooking();
         booking.setUser(user);
         booking.setRoom(room);
         booking.setHotel(room.getHotel());
@@ -81,31 +90,31 @@ public class HotelService {
     }
 
     // REGISTER
-    public UserHotel registerUser(UserHotel user) {
+    public HUser registerUser(HUser user) {
         return userRepo.save(user);
     }
 
     // LOGIN
-    public UserHotel login(String email, String password) {
+    public HUser login(String email, String password) {
         return userRepo.findByEmailAndPassword(email, password);
     }
 
     // SEARCH BY LOCATION
-    public List<Hotels> searchByLocation(String location) {
+    public List<HHotel> searchByLocation(String location) {
         return hotelRepo.findByLocation(location);
     }
 
     // FIND AVAILABLE HOTELS BY DATE
-    public List<Hotels> findAvailableHotels(String location, LocalDate checkin, LocalDate checkout) {
+    public List<HHotel> findAvailableHotels(String location, LocalDate checkin, LocalDate checkout) {
 
-        List<Hotels> hotels = hotelRepo.findByLocation(location);
-        List<Hotels> availableHotels = new ArrayList<>();
+        List<HHotel> hotels = hotelRepo.findByLocation(location);
+        List<HHotel> availableHotels = new ArrayList<>();
 
-        for (Hotels hotel : hotels) {
+        for (HHotel hotel : hotels) {
 
-            List<Rooms> rooms = roomRepo.findByHotelHotelid(hotel.getHotelid());
+            List<HRoom> rooms = roomRepo.findByHotelHotelid(hotel.getHotelid());
 
-            for (Rooms room : rooms) {
+            for (HRoom room : rooms) {
 
                 if (!room.isAvailability()) continue;
 
@@ -120,17 +129,17 @@ public class HotelService {
     }
 
     // HOTEL DETAILS
-    public Hotels getHotelById(Long hotelId) {
+    public HHotel getHotelById(Long hotelId) {
         return hotelRepo.findById(hotelId)
                 .orElseThrow(() -> new ResourceNotFoundException("Hotel not found"));
     }
 
     // ROOM AVAILABILITY CHECK
-    private boolean isRoomAvailable(Rooms room, LocalDate checkin, LocalDate checkout) {
+    private boolean isRoomAvailable(HRoom room, LocalDate checkin, LocalDate checkout) {
 
-        List<Booking> bookings = bookingRepo.findByRoom(room);
+        List<HBooking> bookings = bookingRepo.findByRoom(room);
 
-        for (Booking booking : bookings) {
+        for (HBooking booking : bookings) {
             if (booking.getCheckin().isBefore(checkout) &&
                 booking.getCheckout().isAfter(checkin)) {
                 return false;
@@ -141,7 +150,7 @@ public class HotelService {
     }
 
     // MY BOOKINGS
-    public List<Booking> getMyBookings(Long userId) {
+    public List<HBooking> getMyBookings(Long userId) {
         return bookingRepo.findByUserUserid(userId);
     }
 
