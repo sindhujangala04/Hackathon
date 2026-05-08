@@ -1,0 +1,154 @@
+/* MAIN CONTAINER */
+.hotel-container {
+  padding: 20px;
+  background: #f5f7fa;
+  min-height: 100vh;
+}
+
+.hotel-container h2 {
+  margin-bottom: 20px;
+  color: #333;
+}
+
+/* HOTEL LIST */
+.hotel-list {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+/* HOTEL CARD */
+.hotel-card {
+  display: flex;
+  background: white;
+  border-radius: 12px;
+  overflow: hidden;
+  cursor: pointer;
+  transition: 0.3s;
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+}
+
+.hotel-card:hover {
+  transform: translateY(-5px);
+}
+
+/* IMAGE CONTAINER */
+.hotel-img {
+  width: 180px;
+  height: 150px;
+  background: #ddd;
+}
+
+/* IMAGE */
+.hotel-img img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 10px;
+}
+
+/* DETAILS */
+.hotel-details {
+  padding: 15px;
+  flex: 1;
+}
+
+.hotel-details h3 {
+  margin-bottom: 5px;
+  color: #222;
+}
+
+/* DESCRIPTION */
+.desc {
+  font-size: 14px;
+  color: #555;
+  margin-bottom: 10px;
+}
+
+/* AMENITIES */
+.amenities {
+  margin-top: 10px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.amenities span {
+  background: #e6f0ff;
+  color: #007bff;
+  padding: 5px 10px;
+  border-radius: 20px;
+  font-size: 12px;
+}
+
+/* FILTER BUTTON */
+.filter-btn {
+  position: fixed;
+  bottom: 20px;
+  left: 20px;
+  padding: 10px 15px;
+  background: #007bff;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+/* FILTER BOX */
+.filter-box {
+  position: fixed;
+  bottom: 70px;
+  left: 20px;
+  background: white;
+  padding: 15px;
+  border-radius: 10px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+}
+
+/* POPUP OVERLAY */
+.popup {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* POPUP BOX */
+.popup-box {
+  background: white;
+  padding: 20px;
+  border-radius: 10px;
+  width: 320px;
+  max-width: 90%;
+}
+
+/* DATE ROW */
+.date-row {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 10px;
+}
+
+/* AMENITIES LIST */
+.amenity-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+/* RESPONSIVE */
+@media (max-width: 600px) {
+  .hotel-card {
+    flex-direction: column;
+  }
+
+  .hotel-img {
+    width: 100%;
+    height: 200px;
+  }
+}
