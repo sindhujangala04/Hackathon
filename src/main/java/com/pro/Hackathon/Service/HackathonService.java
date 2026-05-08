@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.pro.Hackathon.ExceptionHandler.CancellationNotAllowedException;
+import com.pro.Hackathon.ExceptionHandler.ResourceNotFoundException;
 import com.pro.Hackathon.ExceptionHandler.RoomAlreadyBookedException;
 import com.pro.Hackathon.ExceptionHandler.UnauthorizedActionException;
 import com.pro.Hackathon.Model.HBooking;
