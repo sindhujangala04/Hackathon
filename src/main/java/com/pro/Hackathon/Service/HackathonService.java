@@ -22,7 +22,7 @@ import com.pro.Hackathon.Repository.HUserRepository;
 
 
 @Service
-public class HotelService {
+public class HackathonService {
 
     @Autowired
     private HUserRepository userRepo;
