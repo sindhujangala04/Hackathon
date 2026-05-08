@@ -77,7 +77,7 @@ const Hotel = () => {
     try {
 
       const res = await axios.get(
-        `http://localhost:8082/api/bylocation?location=${city}`
+        `http://localhost:8085/api/bylocation?location=${city}`
       );
 
       setHotels(res.data);

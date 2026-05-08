@@ -32,7 +32,7 @@ const Bookings = () => {
 
       const res =
         await axios.get(
-          "http://localhost:8082/api/viewbooked",
+          "http://localhost:8085/api/mybookings",
           {
             withCredentials: true,
           }
@@ -77,7 +77,7 @@ const Bookings = () => {
 
         const res =
           await axios.post(
-            `http://localhost:8082/api/cancel/${bookingId}`,
+            `http://localhost:8085/api/cancel/${bookingId}`,
             {},
             {
               withCredentials: true,

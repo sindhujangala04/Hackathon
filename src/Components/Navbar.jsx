@@ -33,7 +33,7 @@ const Navbar = () => {
 
       const res =
         await axios.get(
-          "http://localhost:8082/api/user",
+          "http://localhost:8085/api/profile",
           {
             withCredentials: true,
           }
@@ -55,7 +55,7 @@ const Navbar = () => {
       try {
 
         await axios.post(
-          "http://localhost:8082/api/logout",
+          "http://localhost:8085/api/logout",
           {},
           {
             withCredentials: true,
@@ -98,7 +98,7 @@ const Navbar = () => {
 
             <p>
               <b>Name :</b>{" "}
-              {user?.username}
+              {user?.name}
             </p>
 
             <p>
@@ -106,10 +106,10 @@ const Navbar = () => {
               {user?.email}
             </p>
 
-            <p>
+            {/* <p>
               <b>Phone :</b>{" "}
               {user?.phone}
-            </p>
+            </p> */}
 
             {/* MY BOOKINGS */}
 

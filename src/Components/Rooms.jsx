@@ -78,7 +78,7 @@ const Rooms = () => {
 
         const res =
           await axios.post(
-            `http://localhost:8082/api/${hotel.hotelid}/rooms/search`,
+            `http://localhost:8085/api/${hotel.hotelid}/rooms/search`,
             body
           );
 
@@ -127,7 +127,7 @@ const Rooms = () => {
 
         const res =
           await axios.post(
-            "http://localhost:8082/api/book",
+            "http://localhost:8085/api/book",
             body,
             {
               withCredentials: true,
