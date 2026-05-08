@@ -178,7 +178,7 @@ public class HackathonService {
 
         booking.setStatus("CANCELLED");
         bookingRepo.save(booking);
-
+System.out.println("HI");
         return "Booking cancelled successfully";
     }
 }
