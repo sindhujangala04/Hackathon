@@ -14,20 +14,16 @@ import com.pro.Hackathon.Model.HRoom;
 @Repository
 public interface HBookingRepository extends JpaRepository<HBooking, Long> {
 	//book room -----------------------------------------------------------
-	 @Query("""
-		        SELECT COUNT(b) > 0 FROM Booking b
-		        WHERE b.room.id = :roomId
-		        AND b.status = 'BOOKED'
-		        AND (
-		            b.checkin < :toDate
-		            AND b.checkout > :fromDate
-		        )
-		    """)
-		    boolean isRoomBooked(
-		            Long roomId,
-		            LocalDate fromDate,
-		            LocalDate toDate
-		    );
+	@Query("""
+		    SELECT COUNT(b) > 0 FROM HBooking b
+		    WHERE b.room.roomid = :roomId
+		    AND b.status = 'BOOKED'
+		    AND (
+		        b.checkin < :toDate
+		        AND b.checkout > :fromDate
+		    )
+		""")
+		boolean isRoomBooked(Long roomId, LocalDate fromDate, LocalDate toDate);
 	//--------------------------------------------------------------------------
 
     // get bookings for a specific room
