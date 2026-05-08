@@ -12,9 +12,15 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+
 import com.pro.Hackathon.Model.HBooking;
 import com.pro.Hackathon.Model.HHotel;
 import com.pro.Hackathon.Model.HUser;
+
+import com.pro.Hackathon.DTO.HRoomSearchReq;
+import com.pro.Hackathon.Model.HRoom;
+
+
 
 import jakarta.servlet.http.HttpSession;
 
@@ -23,13 +29,13 @@ import jakarta.servlet.http.HttpSession;
 public class HController {
 
     @Autowired
-    private HotelService service;
+    private HackathonService service;
 
     // SEARCH ROOMS
     @PostMapping("/{hotelId}/rooms/search")
-    public List<Rooms> searchRooms(
+    public List<HRoom> searchRooms(
             @PathVariable Long hotelId,
-            @RequestBody RoomSerachRequest request) {
+            @RequestBody HRoomSearchReq request) {
 
         return service.searchRooms(
                 hotelId,
@@ -44,9 +50,9 @@ public class HController {
 
     // BOOK ROOM
     @PostMapping("/book")
-    public String bookRoom(@RequestBody Bookingreq request, HttpSession session) {
+    public String bookRoom(@RequestBody HBookingreq request, HttpSession session) {
 
-        UserHotel user = (UserHotel) session.getAttribute("user");
+        HUser user = (HUser) session.getAttribute("user");
         if (user == null) {
             throw new UserNotLoggedInException("User not logged in");
         }
@@ -61,14 +67,14 @@ public class HController {
 
     // USER PROFILE
     @GetMapping("/profile")
-    public UserProfileDTO getUserProfile(HttpSession session) {
+    public HUserProfileDTO getUserProfile(HttpSession session) {
 
-        UserHotel user = (UserHotel) session.getAttribute("user");
+        HUser user = (HUser) session.getAttribute("user");
         if (user == null) {
             throw new UserNotLoggedInException("User not logged in");
         }
 
-        UserProfileDTO dto = new UserProfileDTO();
+        HUserProfileDTO dto = new HUserProfileDTO();
         dto.setUserid(user.getUserid());
         dto.setName(user.getUsername());
         dto.setEmail(user.getEmail());
