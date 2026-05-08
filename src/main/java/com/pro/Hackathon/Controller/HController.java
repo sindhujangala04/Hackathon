@@ -12,6 +12,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.pro.Hackathon.Model.HBooking;
+import com.pro.Hackathon.Model.HHotel;
+import com.pro.Hackathon.Model.HUser;
+
 import jakarta.servlet.http.HttpSession;
 
 @RestController
@@ -74,15 +78,15 @@ public class HController {
 
     // REGISTER
     @PostMapping("/register")
-    public UserHotel register(@RequestBody UserHotel user) {
+    public HUser register(@RequestBody HUser user) {
         return service.registerUser(user);
     }
 
     // LOGIN
     @PostMapping("/login")
-    public String login(@RequestBody UserHotel user, HttpSession session) {
+    public String login(@RequestBody HUser user, HttpSession session) {
 
-        UserHotel existingUser = service.login(user.getEmail(), user.getPassword());
+        HUser existingUser = service.login(user.getEmail(), user.getPassword());
 
         if (existingUser != null) {
             session.setAttribute("user", existingUser);
@@ -94,13 +98,13 @@ public class HController {
 
     // SEARCH BY LOCATION
     @GetMapping("/bylocation")
-    public List<Hotels> searchHotelsByLocation(@RequestParam String location) {
+    public List<HHotel> searchHotelsByLocation(@RequestParam String location) {
         return service.searchByLocation(location);
     }
 
     // FILTER BY DATE
     @GetMapping("/date")
-    public List<Hotels> getAvailableHotelsByDate(
+    public List<HHotel> getAvailableHotelsByDate(
             @RequestParam String location,
             @RequestParam String checkin,
             @RequestParam String checkout) {
@@ -113,15 +117,15 @@ public class HController {
 
     // HOTEL DETAILS
     @GetMapping("/hotel/{hotelId}")
-    public Hotels getHotelDetails(@PathVariable Long hotelId) {
+    public HHotel getHotelDetails(@PathVariable Long hotelId) {
         return service.getHotelById(hotelId);
     }
 
     // MY BOOKINGS
     @GetMapping("/mybookings")
-    public List<Booking> myBookings(HttpSession session) {
+    public List<HBooking> myBookings(HttpSession session) {
 
-        UserHotel user = (UserHotel) session.getAttribute("user");
+        HUser user = (HUser) session.getAttribute("user");
         if (user == null) {
             throw new UserNotLoggedInException("User not logged in");
         }
@@ -133,7 +137,7 @@ public class HController {
     @PostMapping("/cancel/{bookingId}")
     public String cancelBooking(@PathVariable Long bookingId, HttpSession session) {
 
-        UserHotel user = (UserHotel) session.getAttribute("user");
+        HUser user = (HUser) session.getAttribute("user");
         if (user == null) {
             throw new UserNotLoggedInException("User not logged in");
         }
