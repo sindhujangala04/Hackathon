@@ -13,7 +13,7 @@ const cities = [
   {
     name: "Warangal",
     image:
-      "https://images.unsplash.com/photo-1609921205586-7c2b1b7a8f2a?q=80&w=1200",
+      "https://images.unsplash.com/photo-1605640840605-14ac1855827b?q=80&w=800",
   },
   {
     name: "Suryapeta",
@@ -23,12 +23,12 @@ const cities = [
   {
     name: "Khammam",
     image:
-      "https://images.unsplash.com/photo-1582515073490-39981397c445?q=80&w=1200",
+      "https://images.unsplash.com/photo-1521295121783-8a321d551ad2?q=80&w=800",
   },
   {
     name: "Karimnagar",
     image:
-      "https://images.unsplash.com/photo-1621173631175-3b4f4d6a6c5b?q=80&w=1200",
+      "https://images.unsplash.com/photo-1512453979798-5ea266f8880c?q=80&w=800",
   },
 ];
 

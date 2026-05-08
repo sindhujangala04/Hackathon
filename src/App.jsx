@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import React from "react";
 
 import {
@@ -58,3 +59,25 @@ export default function App() {
   );
 
 }
+=======
+import "./App.css";
+import Register from "./components/Register";
+import Login from "./components/Login";
+import Home from "./components/Home";
+
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+
+function App() {
+  return (
+    <BrowserRouter>
+      <Routes>
+
+        <Route path="/" element={<Register />} />
+        <Route path="/login" element={<Login />} />
+      </Routes>
+    </BrowserRouter>
+  );
+}
+
+export default App;
+>>>>>>> 4ca17e1c879761277b14415b50bc0772cf3b73eb
