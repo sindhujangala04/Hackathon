@@ -1,57 +1,32 @@
-/* NAVBAR */
 .navbar {
   display: flex;
   justify-content: space-between;
-  align-items: center;
   padding: 15px 20px;
   background: #007bff;
   color: white;
-  position: relative;
-}
-
-/* TITLE */
-.navbar h2 {
-  cursor: pointer;
-}
-
-/* PROFILE ICON */
-.profile {
-  position: relative;
 }
 
 .profile img {
   width: 35px;
-  height: 35px;
-  border-radius: 50%;
   cursor: pointer;
-  transition: 0.3s;
 }
 
-.profile img:hover {
-  transform: scale(1.1);
-}
-
-/* DROPDOWN */
 .dropdown {
   position: absolute;
-  right: 0;
-  top: 50px;
+  right: 20px;
+  top: 60px;
   background: white;
   color: black;
   padding: 15px;
-  border-radius: 10px;
-  width: 200px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
-  z-index: 100;
+  border-radius: 8px;
+  width: 180px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.2);
 }
 
-/* TEXT */
 .dropdown p {
-  margin: 6px 0;
-  font-size: 14px;
+  margin: 5px 0;
 }
 
-/* MY BOOKINGS BUTTON */
 .dropdown-btn {
   width: 100%;
   padding: 8px;
@@ -59,16 +34,10 @@
   border: none;
   background: #007bff;
   color: white;
-  border-radius: 6px;
+  border-radius: 5px;
   cursor: pointer;
-  transition: 0.3s;
 }
 
-.dropdown-btn:hover {
-  background: #0056b3;
-}
-
-/* LOGOUT BUTTON */
 .dropdown button:last-child {
   width: 100%;
   padding: 8px;
@@ -76,11 +45,6 @@
   border: none;
   background: red;
   color: white;
-  border-radius: 6px;
+  border-radius: 5px;
   cursor: pointer;
-  transition: 0.3s;
-}
-
-.dropdown button:last-child:hover {
-  background: darkred;
 }

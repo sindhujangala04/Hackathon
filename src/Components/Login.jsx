@@ -1,29 +1,33 @@
 // Login.jsx
 
-import React, { useState } from "react";
+import React, {
+  useState,
+} from "react";
 
 import {
   Link,
   useNavigate,
 } from "react-router-dom";
 
+import axios from "axios";
+
 import "./Auth.css";
 
 const Login = () => {
 
-  // navigation
-  const navigate = useNavigate();
+  const navigate =
+    useNavigate();
 
-  // form state
-  const [form, setForm] = useState({
-    email: "",
-    password: "",
-  });
+  const [form, setForm] =
+    useState({
+      email: "",
+      password: "",
+    });
 
-  // error state
-  const [error, setError] = useState("");
+  const [error, setError] =
+    useState("");
 
-  // handle input change
+  // input change
   const handleChange = (e) => {
 
     setForm({
@@ -34,37 +38,51 @@ const Login = () => {
 
   };
 
-  // handle login
-  const handleLogin = () => {
+  // login
+  const handleLogin =
+    async () => {
 
-    // simple frontend validation
+      try {
 
-    if (
-      form.email === "" ||
-      form.password === ""
-    ) {
+        const res =
+          await axios.post(
+            "http://localhost:8082/api/login",
+            form,
+            {
+              withCredentials: true,
+            }
+          );
 
-      setError(
-        "Please fill all fields"
-      );
+        if (
+          res.data ===
+          "Login successful"
+        ) {
 
-      return;
+          alert(
+            "Login Successful"
+          );
 
-    }
+          navigate("/home");
 
-    // clear error
+        } else {
 
-    setError("");
+          setError(
+            "Invalid Credentials"
+          );
 
-    // success message
+        }
 
-    alert("Login Successful");
+      } catch (err) {
 
-    // navigate to home page
+        console.log(err);
 
-    navigate("/home");
+        setError(
+          "Server Error"
+        );
 
-  };
+      }
+
+    };
 
   return (
 
@@ -76,8 +94,6 @@ const Login = () => {
           Login
         </h2>
 
-        {/* Email Input */}
-
         <input
           type="email"
           name="email"
@@ -85,8 +101,6 @@ const Login = () => {
           value={form.email}
           onChange={handleChange}
         />
-
-        {/* Password Input */}
 
         <input
           type="password"
@@ -96,36 +110,26 @@ const Login = () => {
           onChange={handleChange}
         />
 
-        {/* Login Button */}
-
         <button
           onClick={handleLogin}
         >
           Login
         </button>
 
-        {/* Error Message */}
-
         {error && (
 
           <p className="error">
-
             {error}
-
           </p>
 
         )}
-
-        {/* Register Link */}
 
         <p>
 
           New User ?
 
           <Link to="/register">
-
             Register
-
           </Link>
 
         </p>

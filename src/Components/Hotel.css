@@ -1,4 +1,3 @@
-/* MAIN CONTAINER */
 .hotel-container {
   padding: 20px;
   background: #f5f7fa;
@@ -7,17 +6,16 @@
 
 .hotel-container h2 {
   margin-bottom: 20px;
-  color: #333;
 }
 
-/* HOTEL LIST */
+/* LIST */
 .hotel-list {
   display: flex;
   flex-direction: column;
   gap: 20px;
 }
 
-/* HOTEL CARD */
+/* CARD */
 .hotel-card {
   display: flex;
   background: white;
@@ -25,26 +23,18 @@
   overflow: hidden;
   cursor: pointer;
   transition: 0.3s;
-  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 3px 10px rgba(0,0,0,0.1);
 }
 
 .hotel-card:hover {
   transform: translateY(-5px);
 }
 
-/* IMAGE CONTAINER */
+/* IMAGE */
 .hotel-img {
   width: 180px;
   height: 150px;
-  background: #ddd;
-}
-
-/* IMAGE */
-.hotel-img img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  border-radius: 10px;
+  background: #ccc;
 }
 
 /* DETAILS */
@@ -55,10 +45,8 @@
 
 .hotel-details h3 {
   margin-bottom: 5px;
-  color: #222;
 }
 
-/* DESCRIPTION */
 .desc {
   font-size: 14px;
   color: #555;
@@ -68,15 +56,13 @@
 /* AMENITIES */
 .amenities {
   margin-top: 10px;
-  display: flex;
-  flex-wrap: wrap;
-  gap: 8px;
 }
 
 .amenities span {
   background: #e6f0ff;
   color: #007bff;
   padding: 5px 10px;
+  margin-right: 8px;
   border-radius: 20px;
   font-size: 12px;
 }
@@ -91,7 +77,6 @@
   color: white;
   border: none;
   border-radius: 8px;
-  cursor: pointer;
 }
 
 /* FILTER BOX */
@@ -102,53 +87,41 @@
   background: white;
   padding: 15px;
   border-radius: 10px;
-  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 5px 15px rgba(0,0,0,0.2);
 }
-
-/* POPUP OVERLAY */
 .popup {
   position: fixed;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
-  background: rgba(0, 0, 0, 0.5);
+  background: rgba(0,0,0,0.5);
   display: flex;
   justify-content: center;
   align-items: center;
 }
 
-/* POPUP BOX */
 .popup-box {
   background: white;
   padding: 20px;
   border-radius: 10px;
   width: 320px;
-  max-width: 90%;
 }
 
-/* DATE ROW */
 .date-row {
   display: flex;
   gap: 10px;
   margin-bottom: 10px;
 }
 
-/* AMENITIES LIST */
 .amenity-list {
   display: flex;
   flex-wrap: wrap;
   gap: 10px;
-}
-
-/* RESPONSIVE */
-@media (max-width: 600px) {
-  .hotel-card {
-    flex-direction: column;
-  }
-
-  .hotel-img {
-    width: 100%;
-    height: 200px;
-  }
+} 
+.hotel-img img{
+  width:100%;
+  height:220px;
+  object-fit:cover;
+  border-radius:10px;
 }

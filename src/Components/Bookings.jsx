@@ -1,140 +1,249 @@
-import React, { useState } from "react";
+// Bookings.jsx
+
+import React, {
+  useEffect,
+  useState,
+} from "react";
+
+import axios from "axios";
 
 import Navbar from "./Navbar";
 
 import "./Bookings.css";
 
-// dummy bookings (frontend only)
-const dummyBookings = [
-  {
-    bookingid: 1,
-    hotel: { hotelname: "Grand Palace", location: "Hyderabad" },
-    room: {
-      roomnumber: "101",
-      capacities: 2,
-      price: 2000,
-      facilities: ["wifi", "ac", "tv"],
-      roomid: 2,
-    },
-    checkin: "2026-05-10",
-    checkout: "2026-05-12",
-    status: "BOOKED",
-    bookeddate: new Date().toISOString(),
-  },
-  {
-    bookingid: 2,
-    hotel: { hotelname: "City Inn", location: "Warangal" },
-    room: {
-      roomnumber: "205",
-      capacities: 3,
-      price: 3000,
-      facilities: ["wifi", "breakfast"],
-      roomid: 3,
-    },
-    checkin: "2026-05-01",
-    checkout: "2026-05-03",
-    status: "BOOKED",
-    bookeddate: new Date(Date.now() - 26 * 60 * 60 * 1000).toISOString(),
-  },
-];
-
 const Bookings = () => {
 
-  const [bookings, setBookings] = useState(dummyBookings);
-  const [loading] = useState(false);
+  const [bookings, setBookings] =
+    useState([]);
 
-  // check 24 hour cancellation rule
-  const canCancelBooking = (bookedDate) => {
+  const [loading, setLoading] =
+    useState(true);
 
-    const bookedTime = new Date(bookedDate);
-    const now = new Date();
+  // fetch bookings
+  useEffect(() => {
+
+    fetchBookings();
+
+  }, []);
+
+  const fetchBookings = async () => {
+
+    try {
+
+      const res =
+        await axios.get(
+          "http://localhost:8082/api/viewbooked",
+          {
+            withCredentials: true,
+          }
+        );
+
+      setBookings(res.data);
+
+      setLoading(false);
+
+    } catch (err) {
+
+      console.log(err);
+
+      setLoading(false);
+
+    }
+  };
+
+  // check 24 hrs
+  const canCancelBooking = (
+    bookedDate
+  ) => {
+
+    const bookedTime =
+      new Date(bookedDate);
+
+    const now =
+      new Date();
 
     const diffHours =
-      (now - bookedTime) / (1000 * 60 * 60);
+      (now - bookedTime) /
+      (1000 * 60 * 60);
 
     return diffHours <= 24;
-
   };
 
-  // cancel booking (frontend only)
-  const cancelBooking = (id) => {
+  // cancel booking
+  const cancelBooking =
+    async (bookingId) => {
 
-    const updated = bookings.map((b) =>
-      b.bookingid === id
-        ? { ...b, status: "CANCELLED" }
-        : b
-    );
+      try {
 
-    setBookings(updated);
+        const res =
+          await axios.post(
+            `http://localhost:8082/api/cancel/${bookingId}`,
+            {},
+            {
+              withCredentials: true,
+            }
+          );
 
-    alert("Booking Cancelled");
+        alert(res.data);
 
-  };
+        fetchBookings();
+
+      } catch (err) {
+
+        console.log(err);
+
+        alert(
+          "Cancel Failed"
+        );
+
+      }
+    };
 
   if (loading) {
+
     return <h2>Loading...</h2>;
+
   }
 
   return (
-
     <div className="bookings-container">
 
       <Navbar />
 
-      <h2>My Bookings</h2>
+      <h2>
+        My Bookings
+      </h2>
 
       {bookings.length === 0 ? (
-        <p>No Bookings Yet</p>
+
+        <p>
+          No Bookings Yet
+        </p>
+
       ) : (
 
         <div className="booking-list">
 
           {bookings.map((b) => (
 
-            <div key={b.bookingid} className="booking-card">
+            <div
+              key={b.bookingid}
+              className="booking-card"
+            >
 
-              {/* Image */}
+              {/* ROOM IMAGE */}
+
               <div className="booking-img">
+
                 <img
-                  src="https://images.unsplash.com/photo-1505693416388-ac5ce068fe85?q=80&w=1200"
+                  src={
+                    b.room?.roomid % 5 === 0
+                      ? "https://images.unsplash.com/photo-1590490360182-c33d57733427?q=80&w=1200"
+                      : b.room?.roomid % 4 === 0
+                      ? "https://images.unsplash.com/photo-1611892440504-42a792e24d32?q=80&w=1200"
+                      : b.room?.roomid % 3 === 0
+                      ? "https://images.unsplash.com/photo-1566665797739-1674de7a421a?q=80&w=1200"
+                      : b.room?.roomid % 2 === 0
+                      ? "https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?q=80&w=1200"
+                      : "https://images.unsplash.com/photo-1505693416388-ac5ce068fe85?q=80&w=1200"
+                  }
                   alt="room"
                 />
+
               </div>
 
-              {/* Details */}
-              <h3>{b.hotel.hotelname}</h3>
+              <h3>
+                {
+                  b.hotel
+                    ?.hotelname
+                }
+              </h3>
 
-              <p>📍 {b.hotel.location}</p>
+              <p>
+                📍
+                {
+                  b.hotel
+                    ?.location
+                }
+              </p>
 
-              <p>🛏 Room: {b.room.roomnumber}</p>
+              <p>
+                🛏 Room :
+                {
+                  b.room
+                    ?.roomnumber
+                }
+              </p>
 
-              <p>👥 Capacity: {b.room.capacities}</p>
+              <p>
+                👥 Capacity :
+                {
+                  b.room
+                    ?.capacities
+                }
+              </p>
 
-              <p>💰 Price: ₹{b.room.price}</p>
+              <p>
+                💰 Price :
+                ₹
+                {
+                  b.room
+                    ?.price
+                }
+              </p>
 
-              <p>📅 Check In: {b.checkin}</p>
+              <p>
+                📅 Check In :
+                {b.checkin}
+              </p>
 
-              <p>📅 Check Out: {b.checkout}</p>
+              <p>
+                📅 Check Out :
+                {b.checkout}
+              </p>
 
-              <p>📌 Status: {b.status}</p>
+              <p>
+                📌 Status :
+                {b.status}
+              </p>
 
-              <p>🕒 Booked At: {b.bookeddate}</p>
+              <p>
+                🕒 Booked At :
+                {b.bookeddate}
+              </p>
 
-              {/* Amenities */}
+              {/* amenities */}
+
               <div className="amenities">
 
-                {b.room.facilities.map((f, i) => (
-                  <span key={i}>{f}</span>
-                ))}
+                {b.room?.facilities?.map(
+                  (f, i) => (
+
+                    <span key={i}>
+                      {f}
+                    </span>
+
+                  )
+                )}
 
               </div>
 
-              {/* Cancel Button */}
-              {b.status === "BOOKED" && (
+              {/* cancel button */}
 
-                canCancelBooking(b.bookeddate) ? (
+              {b.status ===
+                "BOOKED" && (
 
-                  <button onClick={() => cancelBooking(b.bookingid)}>
+                canCancelBooking(
+                  b.bookeddate
+                ) ? (
+
+                  <button
+                    onClick={() =>
+                      cancelBooking(
+                        b.bookingid
+                      )
+                    }
+                  >
                     Cancel Booking
                   </button>
 
@@ -157,9 +266,7 @@ const Bookings = () => {
       )}
 
     </div>
-
   );
-
 };
 
 export default Bookings;

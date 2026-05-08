@@ -1,4 +1,9 @@
-import React, { useState, useEffect } from "react";
+import React, {
+  useEffect,
+  useState,
+} from "react";
+
+import axios from "axios";
 
 import { useNavigate } from "react-router-dom";
 
@@ -6,78 +11,130 @@ import "./Navbar.css";
 
 const Navbar = () => {
 
-  const [open, setOpen] = useState(false);
+  const [open, setOpen] =
+    useState(false);
 
-  const navigate = useNavigate();
+  const [user, setUser] =
+    useState(null);
 
-  // dummy user (frontend only)
-  const [user, setUser] = useState({
-    username: "John Doe",
-    email: "john@example.com",
-    phone: "9876543210",
-  });
+  const navigate =
+    useNavigate();
 
-  // simulate fetching user
+  // fetch logged in user
   useEffect(() => {
 
-    // frontend only simulation
-    setUser({
-      username: "John Doe",
-      email: "john@example.com",
-      phone: "9876543210",
-    });
+    fetchUser();
 
   }, []);
 
-  // logout (frontend only)
-  const handleLogout = () => {
+  const fetchUser = async () => {
 
-    alert("Logged out successfully");
+    try {
 
-    navigate("/login");
+      const res =
+        await axios.get(
+          "http://localhost:8082/api/user",
+          {
+            withCredentials: true,
+          }
+        );
 
+      setUser(res.data);
+
+    } catch (err) {
+
+      console.log(err);
+
+    }
   };
 
-  return (
+  // logout
+  const handleLogout =
+    async () => {
 
+      try {
+
+        await axios.post(
+          "http://localhost:8082/api/logout",
+          {},
+          {
+            withCredentials: true,
+          }
+        );
+
+        navigate("/login");
+
+      } catch (err) {
+
+        console.log(err);
+
+      }
+    };
+
+  return (
     <div className="navbar">
 
-      {/* Logo */}
-      <h2 onClick={() => navigate("/home")}>
+      <h2
+        onClick={() =>
+          navigate("/home")
+        }
+      >
         Hotel Booking
       </h2>
 
-      {/* Profile */}
       <div className="profile">
 
         <img
           src="https://cdn-icons-png.flaticon.com/512/3135/3135715.png"
           alt="profile"
-          onClick={() => setOpen(!open)}
+          onClick={() =>
+            setOpen(!open)
+          }
         />
 
-        {/* Dropdown */}
         {open && (
 
           <div className="dropdown">
 
-            <p><b>Name:</b> {user.username}</p>
-            <p><b>Email:</b> {user.email}</p>
-            <p><b>Phone:</b> {user.phone}</p>
+            <p>
+              <b>Name :</b>{" "}
+              {user?.username}
+            </p>
 
-            {/* My Bookings */}
+            <p>
+              <b>Email :</b>{" "}
+              {user?.email}
+            </p>
+
+            <p>
+              <b>Phone :</b>{" "}
+              {user?.phone}
+            </p>
+
+            {/* MY BOOKINGS */}
+
             <button
               className="dropdown-btn"
               onClick={() => {
-                navigate("/bookings");
+
+                navigate(
+                  "/bookings"
+                );
+
                 setOpen(false);
+
               }}
             >
               My Bookings
             </button>
 
-            {/* Logout */}
-            <button onClick={handleLogout}>
+            {/* LOGOUT */}
+
+            <button
+              onClick={
+                handleLogout
+              }
+            >
               Logout
             </button>
 
@@ -88,9 +145,7 @@ const Navbar = () => {
       </div>
 
     </div>
-
   );
-
 };
 
 export default Navbar;

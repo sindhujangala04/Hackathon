@@ -10,21 +10,25 @@ const cities = [
     image:
       "https://images.unsplash.com/photo-1599661046289-e31897846e41?q=80&w=800",
   },
+
   {
     name: "Warangal",
     image:
       "https://images.unsplash.com/photo-1605640840605-14ac1855827b?q=80&w=800",
   },
+
   {
     name: "Suryapeta",
     image:
       "https://images.unsplash.com/photo-1506744038136-46273834b3fb?q=80&w=800",
   },
+
   {
     name: "Khammam",
     image:
       "https://images.unsplash.com/photo-1521295121783-8a321d551ad2?q=80&w=800",
   },
+
   {
     name: "Karimnagar",
     image:
@@ -37,9 +41,10 @@ const Home = () => {
   const navigate = useNavigate();
 
   const [search, setSearch] = useState("");
+
   const [suggestions, setSuggestions] = useState([]);
 
-  // navigate to hotel page
+  // Navigate to hotel page
   const goToHotel = (city) => {
 
     if (!city) return;
@@ -48,39 +53,38 @@ const Home = () => {
       state: { city },
     });
 
-    setSearch("");
     setSuggestions([]);
-
   };
 
-  // handle search input
+  // Search input
   const handleChange = (e) => {
 
     const value = e.target.value;
 
     setSearch(value);
 
-    if (value.trim() === "") {
+    if (value.trim() !== "") {
+
+      const filtered = cities.filter((c) =>
+        c.name.toLowerCase().includes(value.toLowerCase())
+      );
+
+      setSuggestions(filtered);
+
+    } else {
+
       setSuggestions([]);
-      return;
+
     }
-
-    const filtered = cities.filter((c) =>
-      c.name.toLowerCase().includes(value.toLowerCase())
-    );
-
-    setSuggestions(filtered);
-
   };
 
   return (
-
     <div className="home-container">
 
-      {/* Navbar */}
       <Navbar />
 
-      {/* Search Section */}
+      {/* Search */}
+
       <div className="search-wrapper">
 
         <div className="search-box">
@@ -92,13 +96,16 @@ const Home = () => {
             onChange={handleChange}
           />
 
-          <button onClick={() => goToHotel(search)}>
+          <button
+            onClick={() => goToHotel(search)}
+          >
             Search
           </button>
 
         </div>
 
         {/* Suggestions */}
+
         {suggestions.length > 0 && (
 
           <div className="suggestions">
@@ -108,7 +115,9 @@ const Home = () => {
               <div
                 key={i}
                 className="suggestion-item"
-                onClick={() => goToHotel(city.name)}
+                onClick={() =>
+                  goToHotel(city.name)
+                }
               >
 
                 {city.name}
@@ -124,11 +133,13 @@ const Home = () => {
       </div>
 
       {/* Title */}
+
       <h2 className="title">
         Popular Cities
       </h2>
 
-      {/* City Cards */}
+      {/* Cities */}
+
       <div className="grid">
 
         {cities.map((city, i) => (
@@ -136,7 +147,9 @@ const Home = () => {
           <div
             key={i}
             className="card"
-            onClick={() => goToHotel(city.name)}
+            onClick={() =>
+              goToHotel(city.name)
+            }
           >
 
             <div
@@ -146,7 +159,7 @@ const Home = () => {
                 backgroundSize: "cover",
                 backgroundPosition: "center",
               }}
-            />
+            ></div>
 
             <p>{city.name}</p>
 
@@ -157,9 +170,7 @@ const Home = () => {
       </div>
 
     </div>
-
   );
-
 };
 
 export default Home;
