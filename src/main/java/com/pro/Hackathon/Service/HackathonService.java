@@ -179,7 +179,6 @@ public class HackathonService {
 
         booking.setStatus("CANCELLED");
         bookingRepo.save(booking);
-
         return "Booking cancelled successfully";
     }
 }
