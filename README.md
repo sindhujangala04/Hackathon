@@ -17,6 +17,46 @@ This project allows users to browse hotels, make bookings, manage reservations, 
 * Responsive user interface
 ---
 
+# 🔄 Project Flow
+
+```text
+User Registration/Login
+          ↓
+Browse Hotels
+          ↓
+Select Hotel & Room
+          ↓
+Book Hotel
+          ↓
+Booking Stored in Database
+          ↓
+User Views Booking Status
+```
+
+---
+
+## 📌 Detailed Workflow
+
+### 👤 User Side
+
+1. User opens the application.
+2. User browses available hotels.
+3. User selects hotel details and booking dates.
+4. Booking request is sent to the backend.
+5. Spring Boot APIs process and store booking details in PostgreSQL.
+6. User can view booking confirmation status.
+---
+
+# 🚀 Features
+
+## 👤 User Features
+
+* View available hotels
+* Book hotel rooms
+* Check booking details
+* Manage reservations
+* Responsive user interface
+  
 # 🧑‍💻 Tech Stack
 
 ## Frontend
