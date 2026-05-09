@@ -1,0 +1,50 @@
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  padding: 15px 20px;
+  background: #007bff;
+  color: white;
+}
+
+.profile img {
+  width: 35px;
+  cursor: pointer;
+}
+
+.dropdown {
+  position: absolute;
+  right: 20px;
+  top: 60px;
+  background: white;
+  color: black;
+  padding: 15px;
+  border-radius: 8px;
+  width: 180px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+}
+
+.dropdown p {
+  margin: 5px 0;
+}
+
+.dropdown-btn {
+  width: 100%;
+  padding: 8px;
+  margin-top: 10px;
+  border: none;
+  background: #007bff;
+  color: white;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.dropdown button:last-child {
+  width: 100%;
+  padding: 8px;
+  margin-top: 8px;
+  border: none;
+  background: red;
+  color: white;
+  border-radius: 5px;
+  cursor: pointer;
+}
