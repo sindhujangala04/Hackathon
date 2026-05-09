@@ -131,14 +131,14 @@ public class HController {
 
     // MY BOOKINGS
     @GetMapping("/mybookings")
-    public List<HBooking> myBookings(HttpSession session) {
+    public List<HBooking> myBookings(HttpSession session,Long bookingid) {
 
         HUser user = (HUser) session.getAttribute("user");
         if (user == null) {
             throw new UserNotLoggedInException("User not logged in");
         }
 
-        return service.getMyBookings(user.getUserid());
+        return service.getMyBookings(user.getUserid(), bookingid);
     }
 
     // CANCEL BOOKING

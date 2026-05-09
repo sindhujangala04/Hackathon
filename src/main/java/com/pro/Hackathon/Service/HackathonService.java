@@ -154,8 +154,10 @@ public class HackathonService {
     }
 
     // MY BOOKINGS
-    public List<HBooking> getMyBookings(Long userId) {
-        return bookingRepo.findByUserUserid(userId);
+    public List<HBooking> getMyBookings(Long userId,Long bookingid) {
+    	
+    	List<HBooking> bookings = bookingRepo.findByUserUseridOrderByBookingidDesc(userId);
+        return bookings;
     }
 
     // CANCEL BOOKING

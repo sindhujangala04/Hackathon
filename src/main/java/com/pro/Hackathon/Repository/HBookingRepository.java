@@ -31,4 +31,6 @@ public interface HBookingRepository extends JpaRepository<HBooking, Long> {
 
     List<HBooking> findByUserUserid(Long userid);
 
+	List<HBooking> findByUserUseridOrderByBookingidDesc(Long userId);
+
 }
