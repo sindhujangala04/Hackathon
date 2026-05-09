@@ -9,6 +9,7 @@ import axios from "axios";
 
 import {
   useLocation,
+  useNavigate,
 } from "react-router-dom";
 
 import Navbar from "./Navbar";
@@ -105,7 +106,9 @@ const Rooms = () => {
       setPopup(true);
 
     };
+ const navigate = useNavigate();
 
+ 
   // confirm booking
   const confirmBooking =
     async () => {
@@ -137,7 +140,7 @@ const Rooms = () => {
         alert(
           "Room Booked Successfully"
         );
-
+  navigate("/bookings");
         setPopup(false);
 
       } catch (err) {
@@ -384,8 +387,10 @@ const Rooms = () => {
 
             <button
               onClick={
+                
                 confirmBooking
               }
+              
             >
               Confirm Booking
             </button>

@@ -38,13 +38,27 @@ const Bookings = () => {
           }
         );
 
-      setBookings(res.data);
+      // latest booking on top
+      const sortedBookings =
+        res.data.sort(
+          (a, b) =>
+            new Date(
+              b.bookeddate
+            ) -
+            new Date(
+              a.bookeddate
+            )
+        );
 
-      setLoading(false);
+      setBookings(
+        sortedBookings
+      );
 
     } catch (err) {
 
       console.log(err);
+
+    } finally {
 
       setLoading(false);
 
