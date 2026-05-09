@@ -1,16 +1,201 @@
-# React + Vite
+# 🏨 Hotel Booking Management System
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A full-stack Hotel Booking Management System developed using **React + Vite** for the frontend and **Spring Boot + PostgreSQL** for the backend.
 
-Currently, two official plugins are available:
+This project allows users to browse hotels, make bookings, manage reservations, and handle hotel-related operations through a modern web interface.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+---
 
-## React Compiler
+# 🚀 Features
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+## 👤 User Features
 
-## Expanding the ESLint configuration
+* View available hotels
+* Book hotel rooms
+* Check booking details
+* Manage reservations
+* Responsive user interface
+---
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+# 🧑‍💻 Tech Stack
+
+## Frontend
+
+* React.js
+* Vite
+* Axios
+* React Router DOM
+* CSS
+
+## Backend
+
+* Spring Boot
+* Spring MVC
+* Spring Security
+* Spring Data JPA
+* PostgreSQL
+
+---
+
+# 📂 Project Structure
+
+```bash
+Hackathon/
+│
+├── src/                  # React frontend source code
+├── public/               # Public assets
+├── pom.xml               # Maven configuration
+├── package.json          # Frontend dependencies
+├── vite.config.js        # Vite configuration
+└── README.md
+```
+
+---
+
+# ⚙️ Installation & Setup
+
+## 1️⃣ Clone Repository
+
+```bash
+git clone https://github.com/sindhujangala04/Hackathon.git
+cd Hackathon
+```
+
+---
+
+# ▶️ Frontend Setup
+
+## Install Dependencies
+
+```bash
+npm install
+```
+
+## Run Frontend
+
+```bash
+npm run dev
+```
+
+Frontend runs on:
+
+```bash
+http://localhost:5173
+```
+
+---
+
+# ▶️ Backend Setup
+
+## Configure PostgreSQL
+
+Create a PostgreSQL database.
+
+Example:
+
+```sql
+CREATE DATABASE hotel_booking;
+```
+
+---
+
+## Update application.properties
+
+```properties
+spring.datasource.url=jdbc:postgresql://localhost:5432/hotel_booking
+spring.datasource.username=your_username
+spring.datasource.password=your_password
+
+spring.jpa.hibernate.ddl-auto=update
+spring.jpa.show-sql=true
+```
+
+---
+
+## Run Spring Boot Application
+
+Using Maven:
+
+```bash
+mvn spring-boot:run
+```
+
+OR
+
+```bash
+./mvnw spring-boot:run
+```
+
+Backend runs on:
+
+```bash
+http://localhost:8080
+```
+
+---
+
+# 🔗 API Integration
+
+Frontend communicates with backend APIs using Axios.
+
+Example:
+
+```javascript
+axios.get("http://localhost:8080/api/hotels")
+```
+
+---
+
+# 📦 Dependencies
+
+## Frontend Dependencies
+
+```json
+react
+react-dom
+react-router-dom
+axios
+vite
+```
+
+## Backend Dependencies
+
+* Spring Boot Starter Web MVC
+* Spring Boot Starter Data JPA
+* Spring Boot Starter Security
+* PostgreSQL Driver
+
+---
+
+# 🧪 Run Build
+
+## Frontend Build
+
+```bash
+npm run build
+```
+
+---
+
+# 🌟 Future Enhancements
+
+* Payment Gateway Integration
+* JWT Authentication
+* Email Notifications
+* Review & Rating System
+
+---
+
+# 🤝 Contributing
+
+Contributions are welcome.
+
+1. Fork the repository
+2. Create a feature branch
+3. Commit your changes
+4. Push to your branch
+5. Open a Pull Request
+
+---
+
+
